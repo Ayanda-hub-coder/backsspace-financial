@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | Backspace Financial</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </header>
+
+  <main class="admin-container">
+    
+    <div class="summary-cards">
+      <div class="card summary-card">
+        <h3>Total Assessments</h3>
+        <span id="totalCount">0</span>
+      </div>
+      <div class="card summary-card">
+        <h3>Pass Rate</h3>
+        <span id="passRate">0%</span>
+      </div>
+      <div class="card summary-card">
+        <h3>Average Score</h3>
+        <span id="avgScore">0%</span>
+      </div>
+    </div>
+
+    <div class="card filters-card">
+      <h3>Generate Student Links</h3>
+      <div class="token-generator">
+        <input type="text" id="studentName" placeholder="Student Name (e.g. John Doe)">
+        <input type="text" id="studentEmail" placeholder="Student Email">
+        <button onclick="generateToken()" class="export-btn">Generate Link</button>
+        <div id="generatedLink" class="generated-link"></div>
+      </div>
+    </div>
+
+    <div class="card filters-card">
+      <h3>Filters</h3>
+      <div class="filters">
+        <input type="date" id="dateFrom" placeholder="From Date">
+        <input type="date" id="dateTo" placeholder="To Date">
+        <select id="statusFilter">
+          <option value="">All Status</option>
+          <option value="PASS">Pass</option>
+          <option value="FAIL">Fail</option>
+        </select>
+        <input type="text" id="nameSearch" placeholder="Search by name or employee ID">
+        <button onclick="exportData()" class="export-btn">Export CSV</button>
+        <button onclick="clearAllData()" class="clear-btn">Clear All Data</button>
+      </div>
+    </div>
+
+    <div class="card results-card">
+      <h3>Assessment Results</h3>
+      <div class="table-container">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Employee ID</th>
+              <th>Email</th>
+              <th>Date</th>
+              <th>Score</th>
+              <th>Status</th>
+              <th>Email Sent</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="module" src="firebase-init.js"></script>
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>

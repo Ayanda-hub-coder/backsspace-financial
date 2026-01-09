@@ -1,0 +1,474 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(120deg, #0a3d62, #1e3799);
+  color: #1f2933;
+  position: relative;
+}
+
+body::before {
+  display: none;
+}
+
+/* Hide background logo on assessment page */
+body.assessment::before {
+  display: none;
+}
+
+.entry body::before {
+  display: none;
+}
+
+.entry {
+  background: none;
+}
+
+.entry .bg-overlay {
+  background: rgba(255,255,255,0.85);
+}
+
+.entry .card {
+  margin-bottom: 150px;
+  position: relative;
+}
+
+.entry .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("backspace-logo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 80%;
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.entry .card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.entry::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 380px; /* increased to restore missing image area */
+  background-image: url("applause.png");
+  background-repeat: no-repeat;
+  background-position: center bottom; /* show lower portion */
+  background-size: cover;
+  opacity: 0.6;
+  z-index: 0;
+} 
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  z-index: 2;
+}
+
+.exam-header {
+  position: relative;
+  z-index: 4;
+}
+
+.exam-container {
+  position: relative;
+  z-index: 4;
+}
+
+.card {
+  position: relative;
+  max-width: 520px;
+  margin: 80px auto;
+  padding: 30px;
+  border-radius: 14px;
+  z-index: 2;
+}
+
+.glass {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.result-card {
+  background: white;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+h1 {
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+.alert {
+  color: #b91c1c;
+  font-weight: 600;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+}
+
+.primary-btn {
+  margin-top: 20px;
+  padding: 14px;
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(to right, #0a3d62, #1e3799);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Compact white contact button used on public landing */
+.contact-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 14px 24px; /* increased for better tap area */
+  border-radius: 10px;
+  background: white;
+  color: #0a3d62;
+  border: 1px solid #e6eef9;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  min-width: 250px; /* increased width for visibility */
+  box-shadow: 0 8px 24px rgba(10,61,98,0.08);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* ensure z-index works */
+  z-index: 60; /* place above overlay */
+}
+.contact-btn:hover {
+  background: #f3f6fb;
+}
+
+.contact-link {
+  margin-top: 12px;
+}
+
+.contact-link a {
+  color: #0a3d62;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.primary-btn.full {
+  margin-top: 40px;
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 30px;
+  background: #0f172a;
+  color: white;
+}
+
+.timer {
+  font-weight: 600;
+}
+
+.exam-container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.exam-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("backspace-logo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60%;
+  opacity: 0.08;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.exam-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-logo {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  width: 90px;
+  opacity: 1;
+  z-index: 5;
+}
+
+.question-container {
+  margin-bottom: 30px;
+}
+
+.options {
+  margin: 20px 0;
+}
+
+.options label {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.options label:hover {
+  background-color: #f8fafc;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.navigation button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(to right, #0a3d62, #1e3799);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.navigation button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.navigation span {
+  font-weight: 600;
+  color: #475569;
+}
+
+.question-review {
+  margin-bottom: 25px;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #e2e8f0;
+}
+
+.question-review.correct {
+  border-left-color: #10b981;
+  background-color: #f0fdf4;
+}
+
+.question-review.incorrect {
+  border-left-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.question-review.unanswered {
+  border-left-color: #f59e0b;
+  background-color: #fffbeb;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.question-number {
+  font-weight: 600;
+  color: #374151;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.correct {
+  background-color: #10b981;
+  color: white;
+}
+
+.status-badge.incorrect {
+  background-color: #ef4444;
+  color: white;
+}
+
+.status-badge.unanswered {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.question-text {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.answer-options {
+  margin-bottom: 15px;
+}
+
+.option {
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 6px;
+  background-color: #f9fafb;
+}
+
+.option.correct-option {
+  background-color: #d1fae5;
+  border: 1px solid #10b981;
+  font-weight: 600;
+}
+
+.option.wrong-option {
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  font-weight: 600;
+}
+
+.answer-summary {
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.not-answered {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.review-container, .final-submit {
+  text-align: center;
+  padding: 30px;
+}
+
+.review-container h2, .final-submit h2 {
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.unanswered-list {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.unanswered-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.unanswered-item:hover {
+  background-color: #fde68a;
+}
+
+.question-num {
+  background-color: #f59e0b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-right: 15px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.question-text {
+  flex: 1;
+  font-weight: 500;
+}
+
+.review-actions, .final-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  z-index: 10;
+  position: relative;
+}
+
+.final-actions button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: #6b7280;
+  color: white;
+}
+
+.final-actions button:last-child {
+  background: linear-gradient(to right, #0a3d62, #1e3799) !important;
+  color: white !important;
+}
+
+.submit-summary {
+  background-color: #f8fafc;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}

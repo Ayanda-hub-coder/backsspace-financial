@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assessment In Progress</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body class="assessment">
+
+  <header class="exam-header">
+    <span>BACKSPACE FINANCIAL</span>
+    <span id="timer" class="timer">60:00</span>
+  </header>
+
+  <main class="exam-container">
+    <form id="assessmentForm"></form>
+  </main>
+
+  <img src="hobys-logo.png" class="brand-logo">
+
+  <script>
+    // Initialize EmailJS
+    emailjs.init('C-YoXDiclz35bdGBX');
+  </script>
+  <script type="module" src="firebase-init.js"></script>
+  <script src="questions.js"></script>
+  <script src="timer.js"></script>
+  <script>
+    // Validate token on assessment page - accept session token if user went through start
+    function validateAssessmentAccess() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      const storedToken = localStorage.getItem('accessToken');
+      const sessionToken = sessionStorage.getItem('assessmentToken');
+
+      // Allow if sessionStorage was set during validation on index.html (works across devices)
+      if (token && sessionToken === token) return true;
+
+      // Fallback to older localStorage token
+      if (token && storedToken === token) return true;
+
+      // Otherwise, treat as invalid
+      window.location.href = 'index.html';
+      return false;
+    }
+    
+    // Check access on page load
+    validateAssessmentAccess();
+  </script>
+</body>
+</html>

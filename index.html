@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Backspace Financial | Assessment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="entry">
+
+  <div class="bg-overlay"></div>
+
+  <div class="card glass">
+    <h1>BACKSPACE FINANCIAL</h1>
+    <h2>B2B Sales Executive Assessment</h2>
+
+    <div class="meta">
+      <span>(Product A)</span>
+      <span>Duration: 60 Minutes</span>
+      <span>Pass Mark: 80%</span>
+    </div>
+
+    <p class="alert">⚠ You have ONE attempt only</p>
+
+    <form id="detailsForm">
+      <input type="text" id="fullName" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="text" id="employeeId" placeholder="Trainee ID (e.g HEGOC-016)" required>
+      <button class="primary-btn">Start Assessment</button>
+    </form>
+  </div>
+
+
+  <div style="text-align:center; margin-top:18px;">
+    <a href="mailto:info@backspacefinancial.co.za" class="contact-btn" role="button" aria-label="Email Backspace Financial" title="Contact Backspace Financial">Contact Backspace Financial</a>
+  </div>
+
+  <script src="app.js"></script>
+  <script type="module" src="firebase-init.js"></script>
+  <script>
+    function showAccessDenied() {
+      document.body.innerHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(120deg, #0a3d62, #1e3799); color: white; text-align: center;">
+          <div>
+            <img src="backspace-logo.png" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <h1>🔒 Access Denied</h1>
+            <p>This assessment requires a valid access token.</p>
+            <p>Please contact your administrator for the correct link.</p>
+            <p><em>Note: Each link can only be used once.</em></p>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Check access on page load (async - supports Firestore)
+    (async function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      if (!token) return; // no token, show normal form
+
+      // If Firestore helper is available, use it
+      if (window.FirestoreHelper && window.FirestoreHelper.enabled) {
+        try {
+          const tokenData = await window.FirestoreHelper.getTokenDoc(token);
+          if (tokenData && !tokenData.used) {
+            // Valid token - store for session only (do NOT mark as used yet)
+            sessionStorage.setItem('assessmentToken', token);
+            console.log('Token validated via Firestore:', token);
+            return;
+          } else {
+            console.warn('Token invalid/used via Firestore', tokenData);
+            showAccessDenied();
+            return;
+          }
+        } catch (e) {
+          console.error('Firestore token validation failed, falling back to local storage', e);
+          // fallthrough to localStorage fallback
+        }
+      }
+
+      // LocalStorage fallback: only validate presence and not used; do not mark used on page load
+      const validTokens = JSON.parse(localStorage.getItem('validTokens')) || [];
+      const tokenData = validTokens.find(t => t.token === token && !t.used);
+      if (tokenData) {
+        sessionStorage.setItem('assessmentToken', token);
+        console.log('Token validated via localStorage (fallback):', token);
+      } else {
+        showAccessDenied();
+      }
+    })();
+  </script>
+</body>
+</html>
+
