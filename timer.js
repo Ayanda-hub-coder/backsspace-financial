@@ -1,10 +1,11 @@
-// Check if already attempted for this token
+// Check if already attempted for this token; allow if the assessment is currently in progress in this session
 const tokenForTimer = localStorage.getItem('accessToken') || sessionStorage.getItem('assessmentToken');
-if (tokenForTimer && localStorage.getItem(`attempted_${tokenForTimer}`) === "yes") {
+const inProgress = sessionStorage.getItem('assessmentInProgress') === 'yes';
+if (tokenForTimer && localStorage.getItem(`attempted_${tokenForTimer}`) === "yes" && !inProgress) {
   window.location.href = "index.html";
 }
 
-var seconds = 3600;
+var seconds = 3600; // default to 60 minutes
 var timer = document.getElementById("timer");
 
 window.timerInterval = setInterval(function () {

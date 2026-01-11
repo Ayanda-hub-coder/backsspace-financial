@@ -231,13 +231,8 @@ function generateToken() {
   const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
   const token = `BSF2024_${randomStr}_${timestamp.toString().slice(-6)}`;
   
-  // Build absolute assessment link using configured or derived base URL
-  const base = getAppBaseUrl(true);
-  if (!base) {
-    alert('Please configure a public site URL so emailed links open correctly on students devices. Invite not generated.');
-    return;
-  }
-  const assessmentLink = `${base.replace(/\/$/, '')}/index.html?token=${token}`; 
+  // Build link using relative path (works locally with file:// protocol)
+  const assessmentLink = `index.html?token=${token}`; 
   
   // Store token for validation (add to valid tokens list)
   let validTokens = JSON.parse(localStorage.getItem('validTokens')) || [];

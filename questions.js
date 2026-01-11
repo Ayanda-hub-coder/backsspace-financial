@@ -211,6 +211,9 @@ function submitAssessment() {
     localStorage.removeItem('attempted');
   }
 
+  // Clear the in-progress session marker now that assessment is completed
+  try { sessionStorage.removeItem('assessmentInProgress'); } catch (e) { console.warn('Failed to clear assessmentInProgress', e); }
+
   // Send email to student and wait for send attempt to finish before navigating (prevents send from being cancelled on unload)
   sendResultEmail(assessmentRecord)
     .then((res) => {
