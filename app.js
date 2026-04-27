@@ -1,4 +1,4 @@
-document.getElementById("detailsForm").addEventListener("submit", async function(e) {
+hhhdocument.getElementById("detailsForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
   // Check if user has valid token
